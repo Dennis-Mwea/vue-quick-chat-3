@@ -1,9 +1,10 @@
 <script lang="ts" setup>
-import {mapGetters} from "vuex";
-import type {Message} from "@/Types/Message";
+import {useStore} from "vuex";
+import type Message from "@/Types/Message";
 import CheckIcon from 'vue-material-design-icons/Check.vue';
 import CheckAll from 'vue-material-design-icons/CheckAll.vue';
-import {onMounted} from "vue";
+import {computed, onMounted} from "vue";
+import type Participant from "@/Types/Participant";
 
 withDefaults(
 	defineProps<{
@@ -18,6 +19,7 @@ withDefaults(
 	}
 )
 
+const store = useStore()
 const emits = defineEmits<{
 	onImageClicked: [message: Message]
 }>()
@@ -28,7 +30,7 @@ onMounted(() => {
 	// }
 })
 
-const getters = mapGetters(['getParticipantById', 'messages', 'myself'])
+const myself = computed<Participant>(() => store.getters.myself)
 
 const onImageClicked = (message: Message) => (emits("onImageClicked", message))
 </script>
@@ -37,7 +39,7 @@ const onImageClicked = (message: Message) => (emits("onImageClicked", message))
 	<div class="myself-message-body">
 		<div class="message-content">
 			<template v-if="message.type == 'image'">
-				<p class="message-username-image">{{ getters.myself.name }}</p>
+				<p class="message-username-image">{{ myself.name }}</p>
 
 				<div v-if="message.uploaded" class="message-image">
 					<img :src="message.src" alt="" class="message-image-display" @click="onImageClicked(message)">
@@ -52,7 +54,7 @@ const onImageClicked = (message: Message) => (emits("onImageClicked", message))
 
 			<template v-else>
 				<div :style="{background: colors.message.myself.bg, color: colors.message.myself.text}" class="message-text">
-					<p class="message-username">{{ getters.myself.name }}</p>
+					<p class="message-username">{{ myself.name }}</p>
 
 					<p ref="message-content">{{ message.content }}</p>
 				</div>
@@ -77,7 +79,7 @@ const onImageClicked = (message: Message) => (emits("onImageClicked", message))
 		</div>
 
 		<div v-if="profilePictureConfig.myself" class="thum-container">
-			<img :src="getters.myself.profilePicture" :style="{'width': profilePictureConfig.styles.width, 'height': profilePictureConfig.styles.height, 'border-radius': profilePictureConfig.styles.borderRadius}"
+			<img :src="myself.profilePicture" :style="{'width': profilePictureConfig.styles.width, 'height': profilePictureConfig.styles.height, 'border-radius': profilePictureConfig.styles.borderRadius}"
 			     class="participant-thumb">
 		</div>
 	</div>

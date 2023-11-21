@@ -3,7 +3,7 @@ import {computed, onMounted, onUpdated, ref} from "vue";
 import {useStore} from "vuex";
 import MyMessageComponent from "@/components/MyMessageComponent.vue";
 import OtherMessageComponent from "@/components/OtherMessageComponent.vue";
-import type {Message} from "@/Types/Message";
+import type Message from "@/Types/Message";
 
 const props = withDefaults(
 	defineProps<{
