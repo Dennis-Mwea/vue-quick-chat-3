@@ -2,7 +2,7 @@
 import HeaderComponent from "@/components/HeaderComponent.vue";
 import MessageDisplayComponent from "@/components/MessageDisplayComponent.vue";
 import MessageManagerComponent from "@/components/MessageManagerComponent.vue";
-import {watch} from "vue";
+import {onBeforeMount, watch} from "vue";
 import {useStore} from "vuex";
 import type Message from "@/Types/Message";
 import type Participant from "@/Types/Participant";
@@ -71,11 +71,19 @@ const props = withDefaults(defineProps<{
 const store = useStore()
 const emits = defineEmits(['onClose', 'onType', 'onMessageSubmit', 'onImageSelected', 'onImageClicked'])
 
-watch(props.participants, () => (store.dispatch('setParticipants', props.participants)))
+onBeforeMount(() => {
+	store.dispatch('setMyself', props.myself)
+	store.dispatch('setMessages', props.messages)
+	store.dispatch('setChatTitle', props.chatTitle)
+	store.dispatch('setPlaceholder', props.placeholder)
+	store.dispatch('setParticipants', props.participants)
+})
 
-watch(props.myself, () => (store.dispatch('setMyself', props.myself)))
+watch(props.participants, (value) => store.dispatch('setParticipants', value))
 
-watch(props.messages, () => (store.commit('setMessages', props.messages)))
+watch(props.myself, (value) => store.dispatch('setMyself', value))
+
+watch(props.messages, (value) => store.commit('setMessages', value))
 
 const onClose = () => (emits("onClose"))
 

@@ -31,7 +31,7 @@ const myself = computed<Participant>(() => store.state.myself)
 
 const chatTitle = computed<String>(() => store.state.chatTitle)
 
-const hasHeaderSlot = computed<boolean>(() => !!slots['header'])
+const hasHeaderSlot = computed<boolean>(() => !!slots.header?.length)
 
 const onClose = (): void => emits("onClose")
 </script>

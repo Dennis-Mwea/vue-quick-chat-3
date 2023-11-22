@@ -319,6 +319,7 @@ const onImageClicked = (message: Message) => {
 			               :chat-title="chatTitle"
 			               :close-button-icon-size="closeButtonIconSize"
 			               :colors="colors"
+			               :display-header="true"
 			               :hide-close-button="hideCloseButton"
 			               :link-options="linkOptions"
 			               :load-more-messages="toLoad.length > 0 ? loadMoreMessages : null"
@@ -328,11 +329,10 @@ const onImageClicked = (message: Message) => {
 			               :placeholder="placeholder"
 			               :profile-picture-config="profilePictureConfig"
 			               :scroll-bottom="scrollBottom"
+			               :send-images="true"
 			               :submit-icon-size="submitIconSize"
 			               :submit-image-icon-size="submitImageIconSize"
 			               :timestamp-config="timestampConfig"
-			               display-header
-			               send-images
 			               @onClose="onClose('param value')"
 			               @onImageClicked="onImageClicked"
 			               @onImageSelected="onImageSelected"
