@@ -1,18 +1,24 @@
 {
-  "extends": "@tsconfig/node18/tsconfig.json",
-  "include": [
-    "vite.config.*",
-    "vitest.config.*",
-    "cypress.config.*",
-    "nightwatch.conf.*",
-    "playwright.config.*"
-  ],
-  "compilerOptions": {
-    "composite": true,
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
-    "types": ["node"],
-    "allowJs": true,
-    "noImplicitAny": false
-  }
+	"extends": "@tsconfig/node18/tsconfig.json",
+	"include": [
+		"vite.config.*",
+		"vitest.config.*",
+		"cypress.config.*",
+		"nightwatch.conf.*",
+		"playwright.config.*",
+		"global.d.ts"
+	],
+	"compilerOptions": {
+		"composite": true,
+		"module": "ESNext",
+		"moduleResolution": "Bundler",
+		"types": [
+			"node"
+		],
+		"allowJs": true,
+		"noImplicitAny": false,
+		"paths": {
+			"vue-material-design-icons/Check.vue": ["global.d.ts"]
+		}
+	}
 }

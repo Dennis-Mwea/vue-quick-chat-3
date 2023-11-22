@@ -46,7 +46,7 @@ const onImageClicked = (message: Message) => (emits("onImageClicked", message))
 				</div>
 
 				<div v-else class="message-image">
-					<img :src="message.preview" alt="" class="message-image-display img-overlay">
+					<img :src="message.preview!" alt="" class="message-image-display img-overlay">
 
 					<div class="img-loading"></div>
 				</div>

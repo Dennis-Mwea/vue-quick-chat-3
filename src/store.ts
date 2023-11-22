@@ -7,11 +7,11 @@ import type StateData from "@/Types/StateData";
 export default () => {
     return createStore<StateData>({
         state: {
-            myself: {},
             messages: [],
             chatTitle: '',
             placeholder: '',
             participants: [],
+            myself: {id: 0, name: ''},
         },
 
         mutations: {

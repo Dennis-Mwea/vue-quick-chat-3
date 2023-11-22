@@ -1,4 +1,4 @@
-import type {Timestamp} from "@/Types/Timestamp";
+import {DateTime} from "luxon";
 
 export default interface Message {
     type: string
@@ -6,8 +6,8 @@ export default interface Message {
     content: string
     uploaded: boolean
     participantId: number
-    timestamp: Timestamp
-    preview?: boolean|null
+    timestamp: DateTime
+    preview?: string|null
     src?: string
     myself?:boolean|null
 }

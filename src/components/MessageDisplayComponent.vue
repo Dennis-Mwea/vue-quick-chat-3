@@ -55,8 +55,9 @@ const goToBottom = (): void => {
 	updateScroll.value = false
 }
 
-const updateScrollState = (event: Event & { target: HTMLDivElement }): void => {
-	const {scrollTop, clientHeight, scrollHeight} = event.target;
+const updateScrollState = (event: UIEvent): void => {
+	const target: HTMLDivElement = event.target! as HTMLDivElement
+	const {scrollTop, clientHeight, scrollHeight} = target;
 	updateScroll.value = scrollTop + clientHeight >= scrollHeight;
 
 	if (typeof props.loadMoreMessages === 'function' && scrollTop < 20) {

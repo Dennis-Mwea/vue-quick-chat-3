@@ -2,6 +2,7 @@
   "name": "vue-quick-chat-3",
   "version": "0.0.0",
   "private": true,
+  "main": "./dist/vue-quick-chat.common.js",
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
