@@ -54,7 +54,7 @@ const handleImageChange = async (e: any) => {
 	emits("onImageSelected", {file: files[0], message});
 
 
-	store.dispatch('newMessage', message)
+	await store.dispatch('newMessage', message)
 }
 
 const sendMessage = () => {
