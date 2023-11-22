@@ -3,6 +3,10 @@ declare module "luxon" {
     export * as DateTime from "luxon/src/datetime.js";
 }
 
+declare module "linkifyjs/element" {
+    export * from "linkifyjs/element";
+}
+
 declare module "vuex" {
     export * from "vuex/types/index.d.ts";
     export * from "vuex/types/helpers.d.ts";

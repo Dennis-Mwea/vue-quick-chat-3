@@ -3,10 +3,11 @@ import {useStore} from "vuex";
 import type Message from "@/Types/Message";
 import CheckIcon from 'vue-material-design-icons/Check.vue';
 import CheckAll from 'vue-material-design-icons/CheckAll.vue';
-import {computed, onMounted} from "vue";
+import {computed, onMounted, ref} from "vue";
 import type Participant from "@/Types/Participant";
+import linkifyElement from 'linkifyjs/element'
 
-withDefaults(
+const props = withDefaults(
 	defineProps<{
 		colors: any,
 		linkOptions: any,
@@ -19,15 +20,16 @@ withDefaults(
 	}
 )
 
+const messageContent = ref<HTMLElement | null>(null)
 const store = useStore()
 const emits = defineEmits<{
 	onImageClicked: [message: Message]
 }>()
 
 onMounted(() => {
-	// if(this.$refs['message-content']){
-	// 	linkifyElement(this.$refs['message-content'], this.linkOptions, document)
-	// }
+	if(messageContent.value != null){
+		(linkifyElement as Function)(messageContent.value, props.linkOptions, document)
+	}
 })
 
 const myself = computed<Participant>(() => store.getters.myself)
@@ -56,7 +58,7 @@ const onImageClicked = (message: Message) => (emits("onImageClicked", message))
 				<div :style="{background: colors.message.myself.bg, color: colors.message.myself.text}" class="message-text">
 					<p class="message-username">{{ myself.name }}</p>
 
-					<p ref="message-content">{{ message.content }}</p>
+					<p ref="messageContent">{{ message.content }}</p>
 				</div>
 			</template>
 
