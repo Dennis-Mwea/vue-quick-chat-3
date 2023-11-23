@@ -2,7 +2,15 @@
   "name": "vue-quick-chat-3",
   "version": "0.0.0",
   "private": true,
-  "main": "./dist/vue-quick-chat.common.js",
+  "main": "./dist/vue-quick-chat-3.umd.js",
+  "module": "./dist/vue-quick-chat-3.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/vue-quick-chat-3.es.js",
+      "require": "./dist/vue-quick-chat-3.umd.js"
+    },
+    "./dist/style.css": "./dist/style.css"
+  },
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
