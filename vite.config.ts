@@ -17,5 +17,21 @@ export default defineConfig({
         extensions: [
             '.vue', '.js', '.ts'
         ]
+    },
+    build: {
+        cssCodeSplit: false,
+        lib: {
+            entry: path.resolve(__dirname, "./src/index.ts"),
+            name: "vue-quick-chat-3",
+            fileName: (format) => `vue-quick-chat-3.${format}.js`,
+        },
+        rollupOptions: {
+            external: ["vue"],
+            output: {
+                globals: {
+                    vue: "Vue",
+                },
+            },
+        },
     }
 })
