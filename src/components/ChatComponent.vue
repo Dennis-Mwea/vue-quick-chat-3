@@ -2,10 +2,12 @@
 import HeaderComponent from "@/components/HeaderComponent.vue";
 import MessageDisplayComponent from "@/components/MessageDisplayComponent.vue";
 import MessageManagerComponent from "@/components/MessageManagerComponent.vue";
-import {onBeforeMount, watch} from "vue";
-import {useStore} from "vuex";
+import {getCurrentInstance, nextTick, onBeforeMount, watch} from "vue";
+import {Store, useStore} from "vuex";
+import myStore from "./../store"
 import type Message from "@/Types/Message";
 import type Participant from "@/Types/Participant";
+import type StateData from "@/Types/StateData";
 
 const props = withDefaults(defineProps<{
 	colors: any,
@@ -68,10 +70,13 @@ const props = withDefaults(defineProps<{
 	}),
 })
 
-const store = useStore()
+let store: Store<StateData>;
 const emits = defineEmits(['onClose', 'onType', 'onMessageSubmit', 'onImageSelected', 'onImageClicked'])
 
 onBeforeMount(() => {
+	getCurrentInstance()?.appContext!.app.use(myStore())
+
+	store = useStore()
 	store.dispatch('setMyself', props.myself)
 	store.dispatch('setMessages', props.messages)
 	store.dispatch('setChatTitle', props.chatTitle)
